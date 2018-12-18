@@ -1,6 +1,7 @@
-package fr.wildcodeschool.school.controllers;
+package fr.wildcodeschool.school.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -15,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.wildcodeschool.school.exceptions.ResourceNotFoundException;
-import fr.wildcodeschool.school.models.Language;
-import fr.wildcodeschool.school.models.Student;
-import fr.wildcodeschool.school.repositories.LanguageRepository;
-import fr.wildcodeschool.school.repositories.StudentRepository;
+import fr.wildcodeschool.school.dto.LanguageDTO;
+import fr.wildcodeschool.school.entity.Language;
+import fr.wildcodeschool.school.entity.Student;
+import fr.wildcodeschool.school.exception.ResourceNotFoundException;
+import fr.wildcodeschool.school.repository.LanguageRepository;
+import fr.wildcodeschool.school.repository.StudentRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -42,9 +44,16 @@ public class LanguageController {
 	}
 	
 	@GetMapping("/language/{id}")
-	public Language getById(@PathVariable(value = "id") Long id) {
-	    return repository.findById(id)
-	            .orElseThrow(() -> new ResourceNotFoundException("Language", "id", id));
+	public LanguageDTO getStudentById(@PathVariable(value = "id") Long id) {
+	    
+		return repository.findById(id).map(language -> {
+			
+			LanguageDTO languageDTO = new LanguageDTO();
+			languageDTO.setLanguage(language);
+			languageDTO.setStudents(language.getStudents());
+            
+            return languageDTO;
+        }).orElseThrow(() -> new ResourceNotFoundException("Language", "id", id));
 	}
 	
 	@PutMapping("/language/{id}")

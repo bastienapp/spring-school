@@ -1,4 +1,4 @@
-package fr.wildcodeschool.school.models;
+package fr.wildcodeschool.school.entity;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package fr.wildcodeschool.school.controllers;
+package fr.wildcodeschool.school.controller;
 
 import javax.validation.Valid;
 
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.wildcodeschool.school.exceptions.ResourceNotFoundException;
-import fr.wildcodeschool.school.models.Student;
-import fr.wildcodeschool.school.repositories.SchoolRepository;
-import fr.wildcodeschool.school.repositories.StudentRepository;
+import fr.wildcodeschool.school.entity.Student;
+import fr.wildcodeschool.school.exception.ResourceNotFoundException;
+import fr.wildcodeschool.school.repository.SchoolRepository;
+import fr.wildcodeschool.school.repository.StudentRepository;
 
 @RestController
 @RequestMapping("/api")

@@ -1,4 +1,4 @@
-package fr.wildcodeschool.school.models;
+package fr.wildcodeschool.school.entity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +20,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "student")
@@ -37,7 +38,7 @@ public class Student extends AuditModel {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "school_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private School school;
     	
 	@ManyToMany(fetch = FetchType.LAZY,
